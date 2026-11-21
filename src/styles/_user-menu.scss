@@ -1,0 +1,28 @@
+@use 'variables' as v;
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: v.$space-sm;
+  min-width: 0;
+}
+
+.user-menu__avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-menu__name {
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-menu__error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #e5736b;
+}

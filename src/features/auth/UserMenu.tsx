@@ -13,11 +13,16 @@ export function UserMenu() {
 
     if (!user) {
         return (
-            <div>
-                <button onClick={() => signIn.mutate()} disabled={signIn.isPending}>
+            <div className="user-menu">
+                <button
+                    type="button"
+                    className="button"
+                    onClick={() => signIn.mutate()}
+                    disabled={signIn.isPending}
+                >
                     Sign in with Google
                 </button>
-                {signIn.isError && <p>{signIn.error.message}</p>}
+                {signIn.isError && <p className="user-menu__error">{signIn.error.message}</p>}
             </div>
         );
     }
@@ -26,15 +31,29 @@ export function UserMenu() {
     const avatarUrl = user.user_metadata.avatar_url;
 
     return (
-        <div>
+        <div className="user-menu">
             {avatarUrl && (
-                <img src={avatarUrl} alt="" width={32} height={32} referrerPolicy="no-referrer" />
+                <img
+                    className="user-menu__avatar"
+                    src={avatarUrl}
+                    alt=""
+                    width={32}
+                    height={32}
+                    referrerPolicy="no-referrer"
+                />
             )}
-            <span>{name}</span>
-            <button onClick={() => signOutMutation.mutate()} disabled={signOutMutation.isPending}>
+            <span className="user-menu__name">{name}</span>
+            <button
+                type="button"
+                className="button"
+                onClick={() => signOutMutation.mutate()}
+                disabled={signOutMutation.isPending}
+            >
                 Sign out
             </button>
-            {signOutMutation.isError && <p>{signOutMutation.error.message}</p>}
+            {signOutMutation.isError && (
+                <p className="user-menu__error">{signOutMutation.error.message}</p>
+            )}
         </div>
     );
 }
