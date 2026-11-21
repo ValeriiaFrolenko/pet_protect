@@ -1,0 +1,35 @@
+@use 'variables' as v;
+
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100dvh;
+}
+
+.layout__header {
+  position: relative;
+  z-index: 10;
+  background: v.$color-surface;
+  border-bottom: 1px solid v.$color-border;
+}
+
+.layout__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-md;
+  padding-inline: v.$space-md;
+}
+
+.layout__content {
+  min-height: 0;
+  overflow-y: auto;
+  padding: v.$space-lg v.$space-md;
+}
+
+.page {
+  width: 100%;
+  max-width: v.$content-max-width;
+  margin-inline: auto;
+}
