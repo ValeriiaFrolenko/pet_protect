@@ -11,3 +11,10 @@ insert into public.animals (name, species, breed, age_months, sex, description, 
   ('Coco', 'other', 'Rabbit', 10, 'female', 'Gets along with other pets.', 'https://placehold.co/600x600?text=Coco', 'available'),
   ('Buddy', 'dog', 'Corgi', 42, 'male', 'Loves people and treats.', 'https://placehold.co/600x600?text=Buddy', 'adopted'),
   ('Shadow', 'cat', 'Mixed', 72, 'male', 'Shy at first, then very affectionate.', 'https://placehold.co/600x600?text=Shadow', 'available');
+
+insert into public.events (title, description, starts_at, location, lat, lng, cover_url) values
+                                                                                             ('Adoption day', 'Meet animals looking for a home.', now() + interval '7 days', 'Kyiv, Khreshchatyk St', 50.4501, 30.5234, 'https://placehold.co/600x400?text=Adoption+day'),
+                                                                                             ('Charity walk', 'Walk with the shelter dogs and support the shelter.', now() + interval '14 days', 'Kyiv, Shevchenko Park', 50.4425, 30.5101, 'https://placehold.co/600x400?text=Charity+walk'),
+                                                                                             ('Vaccination day', 'Free checkups for adopted pets.', now() + interval '21 days', 'Kyiv, Podil', 50.4640, 30.5160, 'https://placehold.co/600x400?text=Vaccination+day'),
+                                                                                             ('Volunteer meetup', 'Learn how to help the shelter.', now() + interval '30 days', 'Kyiv, Obolon', 50.5010, 30.4980, 'https://placehold.co/600x400?text=Volunteer+meetup'),
+                                                                                             ('Winter fundraiser', 'Collecting warm blankets and food.', now() + interval '45 days', 'Kyiv, Lukianivska', 50.4620, 30.4810, 'https://placehold.co/600x400?text=Winter+fundraiser');
