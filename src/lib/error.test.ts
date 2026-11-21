@@ -32,4 +32,8 @@ describe('toAppError', () => {
 
         expect(toAppError(original).cause).toBe(original);
     });
+
+    it('maps a raised exception from a database trigger to conflict', () => {
+        expect(toAppError({ message: 'Animal is not available', code: 'P0001' }).kind).toBe('conflict');
+    });
 });

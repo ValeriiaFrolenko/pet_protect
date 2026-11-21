@@ -10,6 +10,7 @@ const MESSAGES: Readonly<Record<AppErrorKind, string>> = {
 
 const KIND_BY_CODE: Readonly<Record<string, AppErrorKind>> = {
     '23505': 'conflict',
+    P0001: 'conflict',
     PGRST116: 'not_found',
     '42501': 'unauthorized',
 };
