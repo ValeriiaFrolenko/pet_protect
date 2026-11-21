@@ -1,0 +1,14 @@
+@use 'variables' as v;
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-sm;
+  justify-content: center;
+  margin-top: v.$space-lg;
+}
+
+.pagination__gap {
+  align-self: center;
+  color: v.$color-muted;
+}
