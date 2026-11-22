@@ -2,9 +2,15 @@ import { NavLink } from 'react-router-dom';
 import { MAIN_NAV, type NavItem } from '../../app/navigation';
 
 function NavEntry({ item }: { item: NavItem }) {
+    const hasQuery = item.to.includes('?');
+
     return (
         <li className="main-nav__item">
-            <NavLink to={item.to} end>
+            <NavLink
+                to={item.to}
+                end={item.to === '/'}
+                className={({ isActive }) => (isActive && !hasQuery ? 'active' : undefined)}
+            >
                 {item.label}
             </NavLink>
             {item.children && (

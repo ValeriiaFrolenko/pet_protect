@@ -66,3 +66,14 @@
     color: v.$color-muted;
   }
 }
+
+.animal-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover .animal-card,
+  &:focus-visible .animal-card {
+    border-color: v.$color-accent;
+  }
+}
