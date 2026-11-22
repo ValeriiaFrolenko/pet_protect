@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import { UserMenu } from '../../features/auth/UserMenu';
+import { Breadcrumbs } from './Breadcrumbs';
+import { HeroSlider } from './HeroSlider';
 import { MainNav } from './MainNav';
-import {Breadcrumbs} from "./Breadcrumbs.tsx";
 
 export function Layout() {
     return (
         <div className="layout">
             <header className="layout__header">
+                <HeroSlider />
                 <div className="layout__bar">
                     <MainNav />
                     <UserMenu />
