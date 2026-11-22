@@ -1,10 +1,15 @@
 @use 'variables' as v;
 
 .slider {
-  position: relative;
-  height: clamp(8rem, 20vh, 14rem);
-  overflow: hidden;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: clamp(9rem, 22vh, 15rem);
   background: v.$color-bg;
+}
+
+.slider__viewport {
+  min-height: 0;
+  overflow: hidden;
 }
 
 .slider__track {
@@ -31,51 +36,30 @@
   object-fit: cover;
 }
 
-.slider__control,
-.slider__toggle {
-  position: absolute;
+.slider__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding-inline: v.$space-sm;
+  background: v.$color-surface;
+}
+
+.slider__control {
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  font-size: 1.25rem;
+  line-height: 1;
   color: v.$color-text;
-  background: rgb(0 0 0 / 50%);
+  background: none;
   border: 0;
   cursor: pointer;
 
   &:hover {
-    background: rgb(0 0 0 / 70%);
+    color: v.$color-accent;
   }
-}
-
-.slider__control {
-  top: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 1.5rem;
-  line-height: 1;
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-
-.slider__control--prev {
-  left: v.$space-sm;
-}
-
-.slider__control--next {
-  right: v.$space-sm;
-}
-
-.slider__toggle {
-  top: v.$space-sm;
-  right: v.$space-sm;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.85rem;
-  border-radius: 0.25rem;
-}
-
-.slider__dots {
-  position: absolute;
-  bottom: v.$space-sm;
-  left: 50%;
-  display: flex;
-  transform: translateX(-50%);
 }
 
 .slider__dot {
@@ -99,5 +83,23 @@
   &[aria-current='true']::before {
     background: v.$color-accent;
     border-color: v.$color-accent;
+  }
+}
+
+.slider__toggle {
+  position: absolute;
+  top: 50%;
+  right: v.$space-sm;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.8rem;
+  color: v.$color-text;
+  background: none;
+  border: 1px solid v.$color-border;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  &:hover {
+    color: v.$color-accent;
   }
 }

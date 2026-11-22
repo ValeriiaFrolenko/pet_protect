@@ -46,45 +46,57 @@ export function HeroSlider() {
             onFocus={() => setIsInteracting(true)}
             onBlur={handleBlur}
         >
-            <ul
-                className="slider__track"
-                style={{ transform: `translateX(-${index * 100}%)` }}
-                aria-live={isAutoplaying ? 'off' : 'polite'}
-            >
-                {HERO_SLIDES.map((slide, slideIndex) => (
-                    <li
-                        key={slide.id}
-                        className="slider__slide"
-                        role="group"
-                        aria-roledescription="slide"
-                        aria-label={`${slideIndex + 1} of ${count}`}
-                        aria-hidden={slideIndex !== index}
-                    >
-                        <img
-                            className="slider__image"
-                            src={slide.src}
-                            alt={slide.alt}
-                            width={1600}
-                            height={400}
-                            loading={slideIndex === 0 ? 'eager' : 'lazy'}
-                        />
-                    </li>
-                ))}
-            </ul>
+            <div className="slider__viewport">
+                <ul
+                    className="slider__track"
+                    style={{ transform: `translateX(-${index * 100}%)` }}
+                    aria-live={isAutoplaying ? 'off' : 'polite'}
+                >
+                    {HERO_SLIDES.map((slide, slideIndex) => (
+                        <li
+                            key={slide.id}
+                            className="slider__slide"
+                            role="group"
+                            aria-roledescription="slide"
+                            aria-label={`${slideIndex + 1} of ${count}`}
+                            aria-hidden={slideIndex !== index}
+                        >
+                            <img
+                                className="slider__image"
+                                src={slide.src}
+                                alt={slide.alt}
+                                width={1600}
+                                height={400}
+                                loading={slideIndex === 0 ? 'eager' : 'lazy'}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </div>
 
             {count > 1 && (
-                <>
+                <div className="slider__bar">
                     <button
                         type="button"
-                        className="slider__control slider__control--prev"
+                        className="slider__control"
                         aria-label="Previous slide"
                         onClick={() => setIndex((current) => shiftIndex(current, -1, count))}
                     >
                         ‹
                     </button>
+                    {HERO_SLIDES.map((slide, slideIndex) => (
+                        <button
+                            key={slide.id}
+                            type="button"
+                            className="slider__dot"
+                            aria-label={`Go to slide ${slideIndex + 1}`}
+                            aria-current={slideIndex === index}
+                            onClick={() => setIndex(slideIndex)}
+                        />
+                    ))}
                     <button
                         type="button"
-                        className="slider__control slider__control--next"
+                        className="slider__control"
                         aria-label="Next slide"
                         onClick={() => setIndex((current) => shiftIndex(current, 1, count))}
                     >
@@ -101,20 +113,7 @@ export function HeroSlider() {
                             {isUserPaused ? 'Play' : 'Pause'}
                         </button>
                     )}
-
-                    <div className="slider__dots">
-                        {HERO_SLIDES.map((slide, slideIndex) => (
-                            <button
-                                key={slide.id}
-                                type="button"
-                                className="slider__dot"
-                                aria-label={`Go to slide ${slideIndex + 1}`}
-                                aria-current={slideIndex === index}
-                                onClick={() => setIndex(slideIndex)}
-                            />
-                        ))}
-                    </div>
-                </>
+                </div>
             )}
         </section>
     );
