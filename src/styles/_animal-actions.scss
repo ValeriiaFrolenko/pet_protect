@@ -1,0 +1,39 @@
+@use 'variables' as v;
+
+.animal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: v.$space-md;
+  margin-top: v.$space-lg;
+}
+
+.animal-actions__hint {
+  color: v.$color-muted;
+}
+
+.action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: v.$space-sm;
+}
+
+.action__note {
+  color: v.$color-muted;
+}
+
+.form {
+  display: grid;
+  gap: v.$space-sm;
+}
+
+.form > .button {
+  justify-self: start;
+}
+
+.form__error {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #e5736b;
+}

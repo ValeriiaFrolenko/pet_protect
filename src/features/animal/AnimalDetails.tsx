@@ -1,6 +1,7 @@
 import { formatAge } from '../../lib/format';
 import { useAnimal } from '../../hooks/useAnimals';
 import { NotFoundPage } from '../../pages/NotFoundPage';
+import {AnimalActions} from "./AnimalActions.tsx";
 
 export function AnimalDetails({ id }: { id: number }) {
     const { data: animal, isPending, isError, error, refetch } = useAnimal(id);
@@ -41,6 +42,7 @@ export function AnimalDetails({ id }: { id: number }) {
                 </p>
                 <span className={`status status--${animal.status}`}>{animal.status}</span>
                 <p>{animal.description || 'No description yet.'}</p>
+                <AnimalActions animal={animal} />
             </div>
         </article>
     );

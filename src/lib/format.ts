@@ -12,3 +12,13 @@ export function formatAge(months: number | null): string {
 
     return rest === 0 ? `${years} y` : `${years} y ${rest} mo`;
 }
+
+const currencyFormatter = new Intl.NumberFormat('uk-UA', {
+    style: 'currency',
+    currency: 'UAH',
+    maximumFractionDigits: 0,
+});
+
+export function formatMoney(amount: number): string {
+    return currencyFormatter.format(amount);
+}

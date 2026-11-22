@@ -44,3 +44,14 @@
   color: v.$color-accent;
   border-color: v.$color-accent;
 }
+
+
+.button--primary {
+  color: v.$color-bg;
+  background: v.$color-accent;
+  border-color: v.$color-accent;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+}
