@@ -22,9 +22,17 @@
   padding-inline: v.$space-md;
 }
 
+.layout__main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 .layout__content {
+  flex: 1;
   min-height: 0;
   overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
   padding: v.$space-lg v.$space-md;
 }
 

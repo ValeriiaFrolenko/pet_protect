@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { UserMenu } from '../../features/auth/UserMenu';
 import { MainNav } from './MainNav';
+import {Breadcrumbs} from "./Breadcrumbs.tsx";
 
 export function Layout() {
     return (
@@ -11,11 +12,14 @@ export function Layout() {
                     <UserMenu />
                 </div>
             </header>
-            <main className="layout__content">
-                <div className="page">
-                    <Outlet />
-                </div>
-            </main>
+            <div className="layout__main">
+                <Breadcrumbs />
+                <main className="layout__content">
+                    <div className="page">
+                        <Outlet />
+                    </div>
+                </main>
+            </div>
         </div>
     );
 }

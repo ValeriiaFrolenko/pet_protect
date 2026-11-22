@@ -1,0 +1,41 @@
+@use 'variables' as v;
+
+.breadcrumbs {
+  padding-inline: v.$space-md;
+  overflow-y: hidden;
+  scrollbar-gutter: stable both-edges;
+  border-bottom: 1px solid v.$color-border;
+  background: v.$color-surface;
+}
+
+.breadcrumbs__list.page {
+  display: flex;
+  flex-wrap: wrap;
+  margin-block: 0;
+  padding: v.$space-sm 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.breadcrumbs__item {
+  color: v.$color-muted;
+
+  & + &::before {
+    content: '/';
+    margin: 0 v.$space-sm;
+    color: v.$color-border;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: v.$color-accent;
+    }
+  }
+
+  [aria-current='page'] {
+    color: v.$color-text;
+  }
+}
