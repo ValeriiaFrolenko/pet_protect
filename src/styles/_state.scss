@@ -1,0 +1,14 @@
+@use 'variables' as v;
+
+.state {
+  margin-block: v.$space-lg;
+  color: v.$color-muted;
+
+  p {
+    margin: 0 0 v.$space-sm;
+  }
+}
+
+.state--error {
+  color: #e5736b;
+}

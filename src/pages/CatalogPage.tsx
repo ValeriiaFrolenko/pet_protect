@@ -1,31 +1,13 @@
 import { useMemo, useRef } from 'react';
+import { ErrorState } from '../components/ErrorState';
+import { LoadingState } from '../components/LoadingState';
 import { Pagination } from '../components/Pagination';
-import { SelectField, type SelectOption } from '../components/SelectField';
-import { AnimalCard } from '../features/catalog/AnimalCard';
-import { buildCatalogPage, type CatalogParams } from '../features/catalog/catalogQuery';
+import { CatalogFilters } from '../features/catalog/CatalogFilters';
+import { CatalogGrid } from '../features/catalog/CatalogGrid';
+import { FILTER_DEFAULTS } from '../features/catalog/catalogOptions';
+import { buildCatalogPage } from '../features/catalog/catalogQuery';
 import { useCatalogParams } from '../features/catalog/useCatalogParams';
 import { useAnimals } from '../hooks/useAnimals';
-
-const SPECIES_OPTIONS: readonly SelectOption<CatalogParams['species']>[] = [
-    { value: 'all', label: 'All species' },
-    { value: 'dog', label: 'Dogs' },
-    { value: 'cat', label: 'Cats' },
-    { value: 'other', label: 'Other' },
-];
-
-const STATUS_OPTIONS: readonly SelectOption<CatalogParams['status']>[] = [
-    { value: 'all', label: 'Any status' },
-    { value: 'available', label: 'Available' },
-    { value: 'reserved', label: 'Reserved' },
-    { value: 'adopted', label: 'Adopted' },
-];
-
-const SORT_OPTIONS: readonly SelectOption<CatalogParams['sort']>[] = [
-    { value: 'newest', label: 'Newest' },
-    { value: 'name', label: 'Name' },
-    { value: 'age_asc', label: 'Youngest first' },
-    { value: 'age_desc', label: 'Oldest first' },
-];
 
 export function CatalogPage() {
     const { data, isPending, isError, error, refetch } = useAnimals();
@@ -43,79 +25,35 @@ export function CatalogPage() {
     };
 
     if (isError) {
-        return (
-            <div>
-                <p>{error.message}</p>
-                <button type="button" className="button" onClick={() => refetch()}>
-                    Retry
-                </button>
-            </div>
-        );
+        return <ErrorState message={error.message} onRetry={() => void refetch()} />;
     }
 
     if (isPending || !catalog) {
-        return <p>Loading...</p>;
+        return <LoadingState />;
     }
 
     return (
         <section className="catalog">
             <h1>Animals</h1>
 
-            <div className="catalog__filters">
-                <label className="field">
-                    <span className="field__label">Search</span>
-                    <input
-                        className="field__control"
-                        type="search"
-                        placeholder="Name or breed"
-                        value={params.search}
-                        onChange={(event) => updateParams({ search: event.target.value })}
-                    />
-                </label>
-                <SelectField
-                    label="Species"
-                    value={params.species}
-                    options={SPECIES_OPTIONS}
-                    onChange={(species) => updateParams({ species })}
-                />
-                <SelectField
-                    label="Status"
-                    value={params.status}
-                    options={STATUS_OPTIONS}
-                    onChange={(status) => updateParams({ status })}
-                />
-                <SelectField
-                    label="Sort by"
-                    value={params.sort}
-                    options={SORT_OPTIONS}
-                    onChange={(sort) => updateParams({ sort })}
-                />
-            </div>
+            <CatalogFilters params={params} onChange={updateParams} />
 
             <div ref={resultsRef}>
                 <p className="catalog__summary">Found: {catalog.total}</p>
 
                 {catalog.items.length === 0 ? (
-                    <div>
+                    <div className="state">
                         <p>No animals match your filters.</p>
                         <button
                             type="button"
                             className="button"
-                            onClick={() =>
-                                updateParams({ search: '', species: 'all', status: 'all', sort: 'newest' })
-                            }
+                            onClick={() => updateParams(FILTER_DEFAULTS)}
                         >
                             Reset filters
                         </button>
                     </div>
                 ) : (
-                    <ul className="catalog__grid">
-                        {catalog.items.map((animal) => (
-                            <li key={animal.id}>
-                                <AnimalCard animal={animal} />
-                            </li>
-                        ))}
-                    </ul>
+                    <CatalogGrid animals={catalog.items} />
                 )}
 
                 <Pagination

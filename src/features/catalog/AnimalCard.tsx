@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { formatAge } from '../../lib/format';
+import { formatAge, formatStatus } from '../../lib/format';
 import type { AnimalListItem } from '../../types/animal';
 
 export function AnimalCard({ animal }: { animal: AnimalListItem }) {
@@ -19,7 +19,9 @@ export function AnimalCard({ animal }: { animal: AnimalListItem }) {
                     <p className="animal-card__meta">
                         {formatAge(animal.age_months)} · {animal.breed ?? 'Unknown breed'}
                     </p>
-                    <span className={`status status--${animal.status}`}>{animal.status}</span>
+                    <span className={`status status--${animal.status}`}>
+                        {formatStatus(animal.status)}
+                    </span>
                 </div>
             </article>
         </Link>

@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
+    cancelAdoptionRequest,
     createAdoptionRequest,
     fetchMyAdoptionRequests,
 } from '../repositories/adoptionRepository';
@@ -23,14 +24,25 @@ export function useMyAdoptionRequests() {
     });
 }
 
-export function useCreateAdoptionRequest() {
+function useRefreshAdoptionData() {
     const queryClient = useQueryClient();
 
+    return () => {
+        void queryClient.invalidateQueries({ queryKey: animalsKeys.all });
+        void queryClient.invalidateQueries({ queryKey: adoptionKeys.all });
+    };
+}
+
+export function useCreateAdoptionRequest() {
     return useMutation<AdoptionRequest, AppError, CreateAdoptionRequestInput>({
         mutationFn: createAdoptionRequest,
-        onSettled: () => {
-            void queryClient.invalidateQueries({ queryKey: animalsKeys.all });
-            void queryClient.invalidateQueries({ queryKey: adoptionKeys.all });
-        },
+        onSettled: useRefreshAdoptionData(),
+    });
+}
+
+export function useCancelAdoptionRequest() {
+    return useMutation<AdoptionRequest, AppError, number>({
+        mutationFn: cancelAdoptionRequest,
+        onSettled: useRefreshAdoptionData(),
     });
 }

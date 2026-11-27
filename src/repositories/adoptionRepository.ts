@@ -32,3 +32,18 @@ export async function createAdoptionRequest(
 
     return data as AdoptionRequest;
 }
+
+export async function cancelAdoptionRequest(requestId: number): Promise<AdoptionRequest> {
+    const { data, error } = await supabase
+        .from('adoption_requests')
+        .update({ status: 'cancelled' })
+        .eq('id', requestId)
+        .select(COLUMNS)
+        .single();
+
+    if (error) {
+        throw toAppError(error);
+    }
+
+    return data as AdoptionRequest;
+}

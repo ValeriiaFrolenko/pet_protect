@@ -10,6 +10,14 @@ const ADOPTION_MESSAGES: Messages = {
     unknown: 'Something went wrong. Please try again later.',
 };
 
+const ADOPTION_CANCEL_MESSAGES: Messages = {
+    conflict: 'This request can no longer be cancelled.',
+    unauthorized: 'Please sign in to cancel the request.',
+    network: 'Network error. Check your connection and try again.',
+    not_found: 'This request can no longer be cancelled.',
+    unknown: 'Something went wrong. Please try again later.',
+};
+
 const SPONSORSHIP_MESSAGES: Messages = {
     conflict: 'You already sponsor this animal.',
     unauthorized: 'Please sign in to become a sponsor.',
@@ -25,6 +33,10 @@ function pickMessage(messages: Messages, error: unknown): string {
 
 export function describeAdoptionError(error: unknown): string {
     return pickMessage(ADOPTION_MESSAGES, error);
+}
+
+export function describeAdoptionCancelError(error: unknown): string {
+    return pickMessage(ADOPTION_CANCEL_MESSAGES, error);
 }
 
 export function describeSponsorshipError(error: unknown): string {

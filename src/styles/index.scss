@@ -2,6 +2,7 @@
 @use 'layout';
 @use 'nav';
 @use 'forms';
+@use 'state';
 @use 'catalog';
 @use 'pagination';
 @use 'user-menu';
@@ -10,3 +11,5 @@
 @use 'modal';
 @use 'breadcrumbs';
 @use 'slider';
+@use 'gallery';
+@use 'events';

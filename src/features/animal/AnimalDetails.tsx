@@ -1,7 +1,9 @@
-import { formatAge } from '../../lib/format';
+import { ErrorState } from '../../components/ErrorState';
+import { LoadingState } from '../../components/LoadingState';
 import { useAnimal } from '../../hooks/useAnimals';
+import { formatAge, formatStatus } from '../../lib/format';
 import { NotFoundPage } from '../../pages/NotFoundPage';
-import {AnimalActions} from "./AnimalActions.tsx";
+import { AnimalActions } from './AnimalActions';
 
 export function AnimalDetails({ id }: { id: number }) {
     const { data: animal, isPending, isError, error, refetch } = useAnimal(id);
@@ -11,18 +13,11 @@ export function AnimalDetails({ id }: { id: number }) {
             return <NotFoundPage />;
         }
 
-        return (
-            <div>
-                <p>{error.message}</p>
-                <button type="button" className="button" onClick={() => refetch()}>
-                    Retry
-                </button>
-            </div>
-        );
+        return <ErrorState message={error.message} onRetry={() => void refetch()} />;
     }
 
     if (isPending) {
-        return <p>Loading...</p>;
+        return <LoadingState />;
     }
 
     return (
@@ -40,7 +35,9 @@ export function AnimalDetails({ id }: { id: number }) {
                     {formatAge(animal.age_months)} · {animal.breed ?? 'Unknown breed'}
                     {animal.sex ? ` · ${animal.sex}` : ''}
                 </p>
-                <span className={`status status--${animal.status}`}>{animal.status}</span>
+                <span className={`status status--${animal.status}`}>
+                    {formatStatus(animal.status)}
+                </span>
                 <p>{animal.description || 'No description yet.'}</p>
                 <AnimalActions animal={animal} />
             </div>
