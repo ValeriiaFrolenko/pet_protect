@@ -22,9 +22,22 @@
   padding-inline: v.$space-md;
 }
 
-.layout__main {
+// Below the desktop breakpoint the side menu is stacked above the content.
+.layout__body {
   display: flex;
   flex-direction: column;
+  min-height: 0;
+
+  @media (min-width: v.$breakpoint-desktop) {
+    flex-direction: row;
+  }
+}
+
+.layout__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
   min-height: 0;
 }
 

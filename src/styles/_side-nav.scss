@@ -1,0 +1,86 @@
+@use 'variables' as v;
+
+$side-nav-width: 256px;
+$side-nav-indent: 16px;
+
+.side-nav {
+  flex: 0 0 auto;
+  background: v.$color-surface;
+  border-bottom: 1px solid v.$color-border;
+
+  @media (min-width: v.$breakpoint-desktop) {
+    display: flex;
+    flex: 0 0 $side-nav-width;
+    flex-direction: column;
+    width: $side-nav-width;
+    border-right: 1px solid v.$color-border;
+    border-bottom: 0;
+  }
+}
+
+.side-nav__open {
+  margin: v.$space-sm v.$space-md;
+
+  @media (min-width: v.$breakpoint-desktop) {
+    display: none;
+  }
+}
+
+// Only the panel scrolls, so the rest of the page stays in place.
+.side-nav__panel {
+  display: none;
+  max-height: 40dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  &--open {
+    display: block;
+  }
+
+  @media (min-width: v.$breakpoint-desktop) {
+    display: block;
+    flex: 1;
+    min-height: 0;
+    max-height: none;
+  }
+}
+
+.side-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Every nesting level adds one indent step to the left padding.
+.side-nav__row {
+  display: flex;
+  align-items: stretch;
+  padding-left: calc(#{v.$space-md} + var(--depth, 0) * #{$side-nav-indent});
+}
+
+.side-nav__link {
+  flex: 1;
+  padding-block: v.$space-sm;
+  text-decoration: none;
+
+  &:hover,
+  &[aria-current='page'] {
+    color: v.$color-accent;
+  }
+
+  &[aria-current='page'] {
+    font-weight: 600;
+  }
+}
+
+.side-nav__toggle {
+  width: 2.5rem;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: 0;
+
+  &:hover {
+    color: v.$color-accent;
+  }
+}

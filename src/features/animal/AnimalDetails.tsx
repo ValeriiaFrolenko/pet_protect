@@ -3,6 +3,7 @@ import { LoadingState } from '../../components/LoadingState';
 import { useAnimal } from '../../hooks/useAnimals';
 import { formatAge, formatStatus } from '../../lib/format';
 import { NotFoundPage } from '../../pages/NotFoundPage';
+import { ShareButtons } from '../share/ShareButtons';
 import { AnimalActions } from './AnimalActions';
 
 export function AnimalDetails({ id }: { id: number }) {
@@ -40,6 +41,10 @@ export function AnimalDetails({ id }: { id: number }) {
                 </span>
                 <p>{animal.description || 'No description yet.'}</p>
                 <AnimalActions animal={animal} />
+                <ShareButtons
+                    url={new URL(`/animals/${animal.id}`, window.location.origin).href}
+                    title={`Meet ${animal.name}`}
+                />
             </div>
         </article>
     );

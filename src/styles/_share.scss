@@ -1,0 +1,22 @@
+@use 'variables' as v;
+
+.share {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-sm;
+  align-items: center;
+  margin-top: v.$space-lg;
+
+  .button {
+    text-decoration: none;
+  }
+}
+
+.share__label,
+.share__status {
+  color: v.$color-muted;
+}
+
+.share__status {
+  font-size: 0.9rem;
+}
