@@ -1,0 +1,41 @@
+@use 'variables' as v;
+
+.home {
+  display: grid;
+  gap: v.$space-lg * 2;
+}
+
+.home-intro {
+  max-width: 40rem;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  p {
+    color: v.$color-muted;
+  }
+}
+
+.home-intro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-sm;
+
+  .button {
+    text-decoration: none;
+  }
+}
+
+.home-section__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: v.$space-sm;
+  margin-bottom: v.$space-md;
+
+  h2 {
+    margin: 0;
+  }
+}

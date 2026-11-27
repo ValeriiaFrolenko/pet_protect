@@ -1,6 +1,6 @@
 import { ErrorState } from '../components/ErrorState';
 import { LoadingState } from '../components/LoadingState';
-import { EventCard } from '../features/events/EventCard';
+import { EventList } from '../features/events/EventList';
 import { useEvents } from '../hooks/useEvents';
 
 export function EventsPage() {
@@ -21,13 +21,7 @@ export function EventsPage() {
             {data.length === 0 ? (
                 <p className="state">No events planned yet.</p>
             ) : (
-                <ul className="events__list">
-                    {data.map((event) => (
-                        <li key={event.id}>
-                            <EventCard event={event} />
-                        </li>
-                    ))}
-                </ul>
+                <EventList events={data} />
             )}
         </section>
     );

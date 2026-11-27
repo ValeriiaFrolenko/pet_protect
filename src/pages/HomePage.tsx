@@ -1,3 +1,13 @@
+import { FeaturedAnimals } from '../features/home/FeaturedAnimals';
+import { HomeIntro } from '../features/home/HomeIntro';
+import { UpcomingEvents } from '../features/home/UpcomingEvents';
+
 export function HomePage() {
-    return <h1>Home</h1>;
+    return (
+        <div className="home">
+            <HomeIntro />
+            <FeaturedAnimals />
+            <UpcomingEvents />
+        </div>
+    );
 }
