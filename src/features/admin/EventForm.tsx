@@ -10,7 +10,7 @@ import {
     validateEventForm,
     type EventFormErrors,
     type EventFormValues,
-} from './eventForm';
+} from './eventFormValues';
 import { PhotoField } from './PhotoField';
 import { TextField } from './TextField';
 

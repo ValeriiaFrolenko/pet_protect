@@ -15,7 +15,7 @@ import {
     validateAnimalForm,
     type AnimalFormErrors,
     type AnimalFormValues,
-} from './animalForm';
+} from './animalFormValues';
 import { describeAdminError } from './errorMessages';
 import { PhotoField } from './PhotoField';
 import { TextField } from './TextField';
