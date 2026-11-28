@@ -1,4 +1,5 @@
 import { useId, useState, type FormEvent } from 'react';
+import { ConfirmButton } from '../../components/ConfirmButton';
 import { Modal } from '../../components/Modal';
 import {
     useCancelSponsorship,
@@ -11,6 +12,7 @@ import { describeSponsorshipError } from './errorMessages';
 
 const MIN_AMOUNT = 1;
 const MAX_AMOUNT = 10000;
+const PRESET_AMOUNTS = [100, 250, 500];
 
 export function SponsorshipAction({ animal }: { animal: Animal }) {
     const amountId = useId();
@@ -38,14 +40,16 @@ export function SponsorshipAction({ animal }: { animal: Animal }) {
         <span className="action__note">
           Sponsoring: {formatMoney(active.monthly_amount)} / month
         </span>
-                <button
-                    type="button"
-                    className="button"
-                    disabled={cancelSponsorship.isPending}
-                    onClick={() => cancelSponsorship.mutate(active.id)}
-                >
-                    Cancel sponsorship
-                </button>
+                <ConfirmButton
+                    label="Cancel sponsorship"
+                    pendingLabel="Cancelling..."
+                    isPending={cancelSponsorship.isPending}
+                    title={`Stop sponsoring ${animal.name}?`}
+                    description="The monthly sponsorship will end. You can start a new one later."
+                    confirmLabel="Stop sponsoring"
+                    dismissLabel="Keep sponsorship"
+                    onConfirm={() => cancelSponsorship.mutate(active.id)}
+                />
                 {cancelSponsorship.isError && (
                     <span className="form__error">{describeSponsorshipError(cancelSponsorship.error)}</span>
                 )}
@@ -97,15 +101,28 @@ export function SponsorshipAction({ animal }: { animal: Animal }) {
                             onChange={(event) => setAmount(event.target.value)}
                         />
                     </label>
+                    <div className="amount-presets" role="group" aria-label="Quick amounts">
+                        {PRESET_AMOUNTS.map((preset) => (
+                            <button
+                                key={preset}
+                                type="button"
+                                className="button button--option"
+                                aria-pressed={value === preset}
+                                onClick={() => setAmount(String(preset))}
+                            >
+                                {formatMoney(preset)}
+                            </button>
+                        ))}
+                    </div>
                     <button
                         type="submit"
                         className="button button--primary"
                         disabled={!isValid || createSponsorship.isPending}
                     >
-                        Become a sponsor
+                        {createSponsorship.isPending ? 'Saving...' : 'Become a sponsor'}
                     </button>
                     {createSponsorship.isError && (
-                        <p className="form__error">{describeSponsorshipError(createSponsorship.error)}</p>
+                        <p className="form__error" role="alert">{describeSponsorshipError(createSponsorship.error)}</p>
                     )}
                 </form>
             </Modal>

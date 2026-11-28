@@ -2,14 +2,18 @@
 
 .user-menu {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: v.$space-sm;
   min-width: 0;
+  padding-block: 0.25rem;
 }
 
 .user-menu__avatar {
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 2px solid v.$color-pink-strong;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -17,12 +21,17 @@
 .user-menu__name {
   max-width: 12rem;
   overflow: hidden;
+  font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media (max-width: 30rem) {
+    max-width: 6rem;
+  }
 }
 
 .user-menu__error {
   margin: 0;
   font-size: 0.85rem;
-  color: #e5736b;
+  color: v.$color-danger;
 }

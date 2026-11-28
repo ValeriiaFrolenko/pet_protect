@@ -12,6 +12,10 @@ export interface CatalogParams {
     page: number;
 }
 
+export function hasActiveFilters(params: CatalogParams): boolean {
+    return params.search.trim() !== '' || params.species !== 'all' || params.status !== 'all';
+}
+
 export interface CatalogPage {
     items: AnimalListItem[];
     total: number;

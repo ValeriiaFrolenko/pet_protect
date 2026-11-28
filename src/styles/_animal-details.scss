@@ -3,18 +3,29 @@
 .animal-details {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: v.$space-lg;
+  align-items: start;
+  gap: v.$space-xl;
 
   @media (min-width: 48rem) {
-    grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
   }
 }
 
 .animal-details__photo {
   width: 100%;
+  height: auto;
   aspect-ratio: 1 / 1;
+  padding: 0.75rem 0.75rem 3rem;
   object-fit: cover;
-  border-radius: 0.5rem;
+  background: v.$color-surface;
+  box-shadow: v.$shadow-raised;
+  rotate: -1.5deg;
+}
+
+.animal-details__info h1 {
+  margin-bottom: v.$space-sm;
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: v.$color-accent;
 }
 
 .animal-details__meta {

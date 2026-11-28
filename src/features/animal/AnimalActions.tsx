@@ -1,3 +1,4 @@
+import { SignInButton } from '../auth/SignInButton';
 import { useAuth } from '../auth/useAuth';
 import type { Animal } from '../../types/animal';
 import { AdoptionAction } from './AdoptionAction';
@@ -11,7 +12,12 @@ export function AnimalActions({ animal }: { animal: Animal }) {
     }
 
     if (!user) {
-        return <p className="animal-actions__hint">Sign in to adopt or sponsor this animal.</p>;
+        return (
+            <div className="animal-actions">
+                <p className="animal-actions__hint">Sign in to adopt or sponsor this animal.</p>
+                <SignInButton className="button button--primary" />
+            </div>
+        );
     }
 
     return (

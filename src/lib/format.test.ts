@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatAge, formatDateTime, formatStatus } from './format';
+import { formatAge, formatDateParts, formatDateTime, formatStatus } from './format';
 
 describe('formatAge', () => {
     it('handles unknown age', () => {
@@ -28,5 +28,15 @@ describe('formatDateTime', () => {
 
     it('does not throw on an invalid date', () => {
         expect(formatDateTime('not a date')).toBe('Date unknown');
+    });
+});
+
+describe('formatDateParts', () => {
+    it('splits a date into a day and a month name', () => {
+        expect(formatDateParts('2026-12-05T12:00:00Z')).toEqual({ day: '5', month: 'December' });
+    });
+
+    it('returns null for an invalid date', () => {
+        expect(formatDateParts('not a date')).toBeNull();
     });
 });

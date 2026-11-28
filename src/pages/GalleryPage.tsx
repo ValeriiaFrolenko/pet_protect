@@ -4,12 +4,15 @@ import { LoadingState } from '../components/LoadingState';
 import { GalleryGrid } from '../features/gallery/GalleryGrid';
 import { toGalleryItems } from '../features/gallery/galleryItems';
 import { useAnimals } from '../hooks/useAnimals';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export function GalleryPage() {
+    useDocumentTitle('Gallery');
+
     const { data, isPending, isError, error, refetch } = useAnimals();
     const items = useMemo(() => toGalleryItems(data ?? []), [data]);
 
-    if (isError) {
+    if (isError && !data) {
         return <ErrorState message={error.message} onRetry={() => void refetch()} />;
     }
 
@@ -18,7 +21,7 @@ export function GalleryPage() {
     }
 
     return (
-        <section>
+        <section className="gallery-page">
             <h1>Gallery</h1>
 
             {items.length === 0 ? (

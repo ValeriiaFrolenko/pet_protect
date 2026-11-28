@@ -1,15 +1,16 @@
 @use 'variables' as v;
 
 .modal {
-  width: min(100% - 2rem, 28rem);
+  width: min(100% - 2rem, 32rem);
   padding: 0;
   color: v.$color-text;
   background: v.$color-surface;
-  border: 1px solid v.$color-border;
-  border-radius: 0.5rem;
+  border: 0;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-raised;
 
   &::backdrop {
-    background: rgb(0 0 0 / 60%);
+    background: rgb(24 20 40 / 65%);
   }
 }
 
@@ -17,15 +18,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: v.$space-md;
+  gap: v.$space-md;
+  padding: v.$space-md v.$space-lg;
   border-bottom: 1px solid v.$color-border;
 }
 
 .modal__title {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.75rem;
 }
 
 .modal__body {
-  padding: v.$space-md;
+  padding: v.$space-lg;
+}
+
+.modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: v.$space-sm;
+  margin-top: v.$space-lg;
 }

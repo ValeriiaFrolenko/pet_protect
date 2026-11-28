@@ -53,10 +53,10 @@ export function AdoptionRequestForm({ animal }: { animal: Animal }) {
                         className="button button--primary"
                         disabled={createRequest.isPending}
                     >
-                        Send request
+                        {createRequest.isPending ? 'Sending...' : 'Send request'}
                     </button>
                     {createRequest.isError && (
-                        <p className="form__error">{describeAdoptionError(createRequest.error)}</p>
+                        <p className="form__error" role="alert">{describeAdoptionError(createRequest.error)}</p>
                     )}
                 </form>
             </Modal>

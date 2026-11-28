@@ -28,7 +28,7 @@ export function ShareButtons({ url, title }: ShareContent) {
             {SHARE_TARGETS.map((target) => (
                 <a
                     key={target.id}
-                    className="button"
+                    className="button button--quiet"
                     href={target.buildHref({ url, title })}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -36,7 +36,7 @@ export function ShareButtons({ url, title }: ShareContent) {
                     {target.label}
                 </a>
             ))}
-            <button type="button" className="button" onClick={() => void copyLink()}>
+            <button type="button" className="button button--quiet" onClick={() => void copyLink()}>
                 Copy link
             </button>
             <span className="share__status" role="status">

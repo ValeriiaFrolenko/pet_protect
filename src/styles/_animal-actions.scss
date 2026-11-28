@@ -6,10 +6,14 @@
   align-items: center;
   gap: v.$space-md;
   margin-top: v.$space-lg;
+  padding: v.$space-lg;
+  background: v.$color-pink;
+  border-radius: v.$radius-lg;
 }
 
 .animal-actions__hint {
-  color: v.$color-muted;
+  flex: 1 1 100%;
+  margin: 0;
 }
 
 .action {
@@ -20,20 +24,27 @@
 }
 
 .action__note {
-  color: v.$color-muted;
+  color: v.$color-text;
 }
 
 .form {
   display: grid;
-  gap: v.$space-sm;
+  grid-template-columns: minmax(0, 1fr);
+  gap: v.$space-md;
 }
 
 .form > .button {
   justify-self: start;
 }
 
+.amount-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-sm;
+}
+
 .form__error {
   margin: 0;
   font-size: 0.9rem;
-  color: #e5736b;
+  color: v.$color-danger;
 }

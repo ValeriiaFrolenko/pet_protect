@@ -9,7 +9,7 @@
 // Sources:
 //   - Dog CEO API (https://dog.ceo/dog-api/)        dogs by breed
 //   - TheCatAPI (https://thecatapi.com/)            cats by breed
-//   - Unsplash CDN (Unsplash License, free to use)  rabbit and hero slides
+//   - Unsplash CDN (Unsplash License, free to use)  rabbit
 //
 // Animal photos keep their original aspect ratio (only the size is limited), so the
 // catalog and the gallery still get images of different dimensions.
@@ -30,12 +30,10 @@ const ONLY = new Set(
 const USER_AGENT = 'Mozilla/5.0 (compatible; pet_protect-photo-script)';
 
 const ANIMALS_DIR = path.join(ROOT, 'public', 'img', 'animals');
-const HERO_DIR = path.join(ROOT, 'public', 'img', 'hero');
 const SEED_PATH = path.join(ROOT, 'supabase', 'seed.sql');
 const UPDATE_SQL_PATH = path.join(ROOT, 'supabase', 'update-photo-urls.sql');
 
 const ANIMAL_MAX_SIDE = 800;
-const HERO_SIZE = { width: 1600, height: 400 };
 
 // source.kind: 'dog' (Dog CEO breed or a list of breeds to try, empty = random),
 // 'cat' (TheCatAPI breed id, empty = random),
@@ -53,14 +51,30 @@ const ANIMALS = [
   { name: 'Coco', slug: 'coco', source: { kind: 'unsplash', photo: 'photo-1617398881039-4c977f633b0e' } },
   { name: 'Buddy', slug: 'buddy', source: { kind: 'dog', breed: 'corgi/cardigan' } },
   { name: 'Shadow', slug: 'shadow', source: { kind: 'cat', breed: '' } },
-];
-
-// To change a hero photo: open the photo on unsplash.com, copy the image address
-// (right click, "Copy image address") and take the "photo-..." part from it.
-const HERO_SLIDES = [
-  { slug: 'adopt', photo: 'photo-1491545437994-ebc9551b87d7' },
-  { slug: 'events', photo: 'photo-1719770800135-e8dade5dd5de' },
-  { slug: 'sponsor', photo: 'photo-1617469918593-fd004f8b8a81' },
+  { name: 'Oscar', slug: 'oscar', source: { kind: 'dog', breed: 'retriever/golden' } },
+  { name: 'Cleo', slug: 'cleo', source: { kind: 'cat', breed: 'pers' } },
+  { name: 'Rocky', slug: 'rocky', source: { kind: 'dog', breed: 'boxer' } },
+  { name: 'Simba', slug: 'simba', source: { kind: 'cat', breed: 'beng' } },
+  { name: 'Molly', slug: 'molly', source: { kind: 'dog', breed: 'poodle/standard' } },
+  { name: 'Misty', slug: 'misty', source: { kind: 'cat', breed: 'ragd' } },
+  { name: 'Archie', slug: 'archie', source: { kind: 'dog', breed: 'pug' } },
+  { name: 'Felix', slug: 'felix', source: { kind: 'cat', breed: 'abys' } },
+  { name: 'Ruby', slug: 'ruby', source: { kind: 'dog', breed: 'dachshund' } },
+  { name: 'Willow', slug: 'willow', source: { kind: 'cat', breed: 'birm' } },
+  { name: 'Toby', slug: 'toby', source: { kind: 'dog', breed: 'shiba' } },
+  { name: 'Smokey', slug: 'smokey', source: { kind: 'cat', breed: 'rblu' } },
+  { name: 'Lola', slug: 'lola', source: { kind: 'dog', breed: 'samoyed' } },
+  { name: 'Hazel', slug: 'hazel', source: { kind: 'cat', breed: 'sibe' } },
+  { name: 'Duke', slug: 'duke', source: { kind: 'dog', breed: 'rottweiler' } },
+  { name: 'Pepper', slug: 'pepper', source: { kind: 'cat', breed: 'bomb' } },
+  { name: 'Penny', slug: 'penny', source: { kind: 'dog', breed: ['spaniel/cocker', 'spaniel'] } },
+  { name: 'Leo', slug: 'leo', source: { kind: 'cat', breed: 'norw' } },
+  { name: 'Bruno', slug: 'bruno', source: { kind: 'dog', breed: 'akita' } },
+  { name: 'Ginger', slug: 'ginger', source: { kind: 'cat', breed: '' } },
+  { name: 'Zoe', slug: 'zoe', source: { kind: 'dog', breed: 'dalmatian' } },
+  { name: 'Oliver', slug: 'oliver', source: { kind: 'cat', breed: '' } },
+  { name: 'Teddy', slug: 'teddy', source: { kind: 'dog', breed: 'pomeranian' } },
+  { name: 'Mia', slug: 'mia', source: { kind: 'cat', breed: '' } },
 ];
 
 async function exists(filePath) {
@@ -199,26 +213,6 @@ async function saveAnimal(animal) {
   return true;
 }
 
-async function saveHero(slide) {
-  const target = path.join(HERO_DIR, `${slide.slug}.jpg`);
-
-  if (shouldSkip(slide.slug, await exists(target))) {
-    console.log(`skip   hero/${slide.slug}`);
-    return true;
-  }
-
-  const buffer = await fetchBuffer(unsplashImageUrl(slide.photo, HERO_SIZE.width * 2));
-
-  await sharp(buffer)
-    .rotate()
-    .resize({ ...HERO_SIZE, fit: 'cover', position: sharp.strategy.attention })
-    .jpeg({ quality: 72, mozjpeg: true })
-    .toFile(target);
-
-  console.log(`ok     hero/${slide.slug}`);
-  return true;
-}
-
 async function patchSeed() {
   if (!(await exists(SEED_PATH))) {
     console.warn('seed.sql not found, skipping');
@@ -257,7 +251,6 @@ async function writeUpdateSql() {
 
 async function main() {
   await mkdir(ANIMALS_DIR, { recursive: true });
-  await mkdir(HERO_DIR, { recursive: true });
 
   const failures = [];
 
@@ -270,27 +263,13 @@ async function main() {
     }
   }
 
-  for (const slide of HERO_SLIDES) {
-    try {
-      await saveHero(slide);
-    } catch (error) {
-      console.error(`FAILED hero/${slide.slug}: ${error.message}`);
-      failures.push({
-        file: `public/img/hero/${slide.slug}.jpg`,
-        error,
-        page: `${unsplashImageUrl(slide.photo, 1600)}`,
-      });
-    }
-  }
-
   await patchSeed();
   await writeUpdateSql();
 
   if (failures.length > 0) {
     console.error('\nThese files were not downloaded:');
     for (const failure of failures) {
-      const hint = failure.page ? ` (open ${failure.page} in the browser and save the image)` : '';
-      console.error(`  ${failure.file}${hint}`);
+      console.error(`  ${failure.file}`);
     }
     console.error('Run the script again, or put the files in these places by hand.');
     process.exitCode = 1;

@@ -1,16 +1,7 @@
 @use 'variables' as v;
 
-$nav-breakpoint: 64rem;
-
-.main-nav__toggle {
-  margin-block: v.$space-sm;
-  padding: v.$space-sm v.$space-md;
-  font: inherit;
-  color: v.$color-text;
-  background: none;
-  border: 1px solid v.$color-border;
-  border-radius: 0.25rem;
-  cursor: pointer;
+.button.main-nav__toggle {
+  margin-block: 0.25rem;
 }
 
 .main-nav {
@@ -20,48 +11,68 @@ $nav-breakpoint: 64rem;
   left: 0;
   display: none;
   flex-direction: column;
-  max-height: 70dvh;
+  max-height: 60dvh;
   margin: 0;
   padding: 0;
   overflow-y: auto;
   list-style: none;
   background: v.$color-surface;
   border-bottom: 1px solid v.$color-border;
+  box-shadow: v.$shadow-raised;
 }
 
 .main-nav--open {
   display: flex;
 }
 
+// The submenu is always visible in the mobile panel, so it needs no toggle there.
 .main-nav__item {
   position: relative;
-
-  > a {
-    display: block;
-    padding: v.$space-md 1.25rem;
-    text-decoration: none;
-    white-space: nowrap;
-
-    &:hover,
-    &.active {
-      color: v.$color-accent;
-    }
-  }
 
   & + & {
     border-top: 1px solid v.$color-border;
   }
 }
 
-.main-nav__submenu {
-  margin: 0;
-  padding: 0 0 0 v.$space-md;
-  list-style: none;
-  border-top: 1px solid v.$color-border;
+.main-nav__link,
+.main-nav__sublink {
+  display: block;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover,
+  &.active,
+  &[aria-current='page'] {
+    color: v.$color-accent;
+    background: v.$color-pink;
+  }
 }
 
-@media (min-width: $nav-breakpoint) {
-  .main-nav__toggle {
+.main-nav__link {
+  font-family: v.$font-display;
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.main-nav__expand {
+  display: none;
+}
+
+.main-nav__submenu {
+  margin: 0;
+  padding: 0 0 v.$space-sm v.$space-md;
+  list-style: none;
+}
+
+.main-nav__sublink {
+  font-weight: 500;
+}
+
+@media (min-width: v.$breakpoint-desktop) {
+  .button.main-nav__toggle {
     display: none;
   }
 
@@ -74,11 +85,37 @@ $nav-breakpoint: 64rem;
     overflow: visible;
     background: none;
     border-bottom: 0;
+    box-shadow: none;
   }
 
+  .main-nav__item {
+    display: flex;
+    align-items: center;
+    margin-block: 0.25rem;
+  }
+
+  // Horizontal items separated by a vertical line.
   .main-nav > .main-nav__item + .main-nav__item {
     border-top: 0;
-    border-left: 1px solid v.$color-border;
+    border-left: 2px solid v.$color-pink-strong;
+  }
+
+  .main-nav__link {
+    margin-inline: 0.25rem;
+    padding: 0.375rem 1rem;
+    border-radius: v.$radius-pill;
+  }
+
+  .main-nav__expand {
+    display: block;
+    width: 2rem;
+    height: v.$tap-size;
+    margin: 0 0.25rem 0 -0.5rem;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: 0;
   }
 
   .main-nav__submenu {
@@ -87,13 +124,21 @@ $nav-breakpoint: 64rem;
     left: 0;
     display: none;
     min-width: 12rem;
-    padding: 0;
+    padding: v.$space-sm 0;
     background: v.$color-surface;
     border: 1px solid v.$color-border;
+    border-radius: v.$radius-sm;
+    box-shadow: v.$shadow-raised;
   }
 
-  .main-nav__item:hover > .main-nav__submenu,
+  .main-nav__item--expanded > .main-nav__submenu,
   .main-nav__item:focus-within > .main-nav__submenu {
     display: block;
+  }
+
+  @media (hover: hover) {
+    .main-nav__item:hover > .main-nav__submenu {
+      display: block;
+    }
   }
 }

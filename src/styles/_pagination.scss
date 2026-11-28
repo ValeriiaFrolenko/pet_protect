@@ -5,7 +5,11 @@
   flex-wrap: wrap;
   gap: v.$space-sm;
   justify-content: center;
-  margin-top: v.$space-lg;
+  margin-top: v.$space-xl;
+
+  .button {
+    min-width: v.$tap-size;
+  }
 }
 
 .pagination__gap {

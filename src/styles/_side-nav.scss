@@ -18,8 +18,16 @@ $side-nav-indent: 16px;
   }
 }
 
-.side-nav__open {
-  margin: v.$space-sm v.$space-md;
+.button.side-nav__open {
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: v.$space-md;
+  border: 0;
+  border-radius: 0;
+
+  &::after {
+    content: '▾';
+  }
 
   @media (min-width: v.$breakpoint-desktop) {
     display: none;
@@ -42,6 +50,48 @@ $side-nav-indent: 16px;
     flex: 1;
     min-height: 0;
     max-height: none;
+    padding-bottom: v.$space-md;
+  }
+}
+
+// Desktop only: folds the column into a narrow strip with a button that brings it back.
+.side-nav__collapse {
+  display: none;
+
+  @media (min-width: v.$breakpoint-desktop) {
+    display: block;
+    flex: 0 0 auto;
+    align-self: flex-end;
+    min-width: v.$tap-size;
+    min-height: v.$tap-size;
+    padding-inline: v.$space-md;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: v.$color-muted;
+    cursor: pointer;
+    background: none;
+    border: 0;
+
+    &:hover {
+      color: v.$color-accent;
+    }
+  }
+}
+
+.side-nav--collapsed {
+  @media (min-width: v.$breakpoint-desktop) {
+    flex-basis: v.$tap-size;
+    width: v.$tap-size;
+
+    .side-nav__collapse {
+      padding: 0;
+      font-size: 1.25rem;
+    }
+
+    .side-nav__panel {
+      display: none;
+    }
   }
 }
 
@@ -54,28 +104,31 @@ $side-nav-indent: 16px;
 // Every nesting level adds one indent step to the left padding.
 .side-nav__row {
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  padding-right: v.$space-sm;
   padding-left: calc(#{v.$space-md} + var(--depth, 0) * #{$side-nav-indent});
 }
 
 .side-nav__link {
   flex: 1;
-  padding-block: v.$space-sm;
+  padding: v.$space-sm 0.625rem;
   text-decoration: none;
+  border-radius: v.$radius-sm;
 
-  &:hover,
-  &[aria-current='page'] {
+  &:hover {
     color: v.$color-accent;
   }
 
   &[aria-current='page'] {
-    font-weight: 600;
+    font-weight: 700;
+    color: v.$color-accent;
+    background: v.$color-pink;
   }
 }
 
 .side-nav__toggle {
-  flex: 0 0 2.75rem;
-  min-height: 2.75rem;
+  flex: 0 0 v.$tap-size;
+  min-height: v.$tap-size;
   font-size: 1.25rem;
   line-height: 1;
   color: inherit;

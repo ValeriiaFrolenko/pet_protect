@@ -10,20 +10,23 @@
 - React Router (SPA-навігація)
 - TanStack Query (запити, кеш, повторні спроби)
 - Supabase (база PostgreSQL, Row Level Security, вхід через Google)
-- SCSS (partials у `src/styles`)
+- SCSS (partials у `src/styles`), локальні шрифти через `@fontsource` (Inter, Barlow Condensed)
 - Leaflet + OpenStreetMap (карта на сторінці «Контакти»)
 - ESLint, Vitest
 
 ## Можливості
 
-- Слайдер зображень у шапці і головне горизонтальне меню з підменю
-- Ліве багаторівневе меню (3 рівні, відступ рівня 16px, ширина 256px) з власною прокруткою
+- Компактний слайдер у шапці (його можна сховати), головне горизонтальне меню з підменю
+- Ліве багаторівневе меню (3 рівні, відступ рівня 16px, ширина 256px) з власною прокруткою,
+  на десктопі згортається; вибір зберігається в `localStorage`
 - Хлібні крихти; шапка і крихти нерухомі, прокручується тільки блок контенту
 - Каталог тварин: пошук, фільтри за видом і статусом, сортування, клієнтська пагінація
   (10 елементів на сторінку); параметри зберігаються в URL
 - Сторінка тварини: заявка на усиновлення (з можливістю скасувати), спонсорство, шаринг
 - Події притулку, галерея (плитки 300x300, лайтбокс), контакти з картою
-- Вхід через Google, ім'я і аватар користувача в шапці
+- Вхід через Google, ім'я і аватар користувача в шапці; після входу користувач повертається на
+  ту саму сторінку
+- Головна сторінка: картки тварин, які можна пересувати мишею, і блок про спонсорство
 - Шаринг у Facebook, Telegram, X і копіювання посилання
 
 ## Запуск
@@ -73,14 +76,22 @@ supabase link --project-ref <ref>
 supabase db push         # застосовує міграції
 ```
 
-`seed.sql` на віддаленому проекті виконується вручну в SQL Editor.
+`seed.sql` на віддаленому проекті виконується вручну в SQL Editor. Для вже заповненої бази
+шляхи до зображень оновлюють `supabase/update-photo-urls.sql` і
+`supabase/update-event-covers.sql`. Додаткових тварин у таку базу додає `supabase/add-animals.sql`.
+
+## Зображення
+
+Фото лежать у `public/img`. Їх завантажує `node scripts/download-photos.mjs`
+(джерела: Dog CEO API, TheCatAPI, Unsplash).
 
 ### Вхід через Google
 
 1. У Supabase Dashboard: Authentication → Providers → Google, увімкнути і вказати Client ID та
    Client Secret з Google Cloud Console.
-2. У Authentication → URL Configuration додати адресу застосунку (`http://localhost:5173`
-   для розробки) в Site URL і Redirect URLs.
+2. У Authentication → URL Configuration вказати адресу застосунку (`http://localhost:5173`
+   для розробки) в Site URL, а в Redirect URLs додати `http://localhost:5173/**`. Шаблон `/**`
+   потрібен, бо після входу застосунок повертає користувача на сторінку, з якої він почав.
 3. У Google Cloud Console в Authorized redirect URIs додати callback-адресу з Supabase
    (вона показана на сторінці провайдера Google).
 

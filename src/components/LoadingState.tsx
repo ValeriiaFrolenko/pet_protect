@@ -1,6 +1,6 @@
 export function LoadingState() {
     return (
-        <p className="state" role="status">
+        <p className="state state--loading" role="status">
             Loading...
         </p>
     );

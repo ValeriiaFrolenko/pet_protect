@@ -1,0 +1,39 @@
+@use 'variables' as v;
+
+.footer {
+  flex-shrink: 0;
+  padding: v.$space-xl v.$space-md v.$space-lg;
+  color: v.$color-surface;
+  background: v.$color-text;
+
+  p {
+    margin: 0 0 v.$space-sm;
+  }
+
+  a:hover {
+    color: v.$color-pink-strong;
+  }
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: v.$space-lg;
+}
+
+.footer__title {
+  margin-bottom: v.$space-sm;
+  font-size: 1.35rem;
+  color: v.$color-pink-strong;
+}
+
+.footer__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-block;
+    padding-block: 0.25rem;
+  }
+}

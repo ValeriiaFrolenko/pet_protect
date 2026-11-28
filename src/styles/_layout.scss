@@ -2,7 +2,8 @@
 
 .layout {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   height: 100dvh;
 }
 
@@ -10,7 +11,7 @@
   position: relative;
   z-index: 10;
   background: v.$color-surface;
-  border-bottom: 1px solid v.$color-border;
+  box-shadow: v.$shadow-card;
 }
 
 .layout__bar {
@@ -18,8 +19,25 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: v.$space-md;
+  column-gap: v.$space-md;
   padding-inline: v.$space-md;
+}
+
+.button.banner-toggle {
+  margin-left: auto;
+  font-size: 0.85rem;
+}
+
+// Phones: only the arrow is shown, so the bar stays in one row.
+.banner-toggle__text {
+  @media (max-width: 40rem) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
 
 // Below the desktop breakpoint the side menu is stacked above the content.
@@ -42,11 +60,18 @@
 }
 
 .layout__content {
+  // Keeps absolutely positioned children inside the scroll container.
+  position: relative;
+  display: flex;
   flex: 1;
+  flex-direction: column;
   min-height: 0;
-  overflow-y: auto;
-  scrollbar-gutter: stable both-edges;
-  padding: v.$space-lg v.$space-md;
+  overflow: hidden auto;
+}
+
+.layout__page {
+  flex: 1 0 auto;
+  padding: v.$space-lg v.$space-md v.$space-xl;
 }
 
 .page {

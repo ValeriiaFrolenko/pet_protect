@@ -9,13 +9,14 @@ export function AnimalCard({ animal }: { animal: AnimalListItem }) {
                 <img
                     className="animal-card__photo"
                     src={animal.photo_url}
-                    alt={animal.name}
+                    alt=""
                     width={300}
                     height={300}
                     loading="lazy"
+                    decoding="async"
                 />
                 <div className="animal-card__body">
-                    <h2 className="animal-card__name">{animal.name}</h2>
+                    <h3 className="animal-card__name">{animal.name}</h3>
                     <p className="animal-card__meta">
                         {formatAge(animal.age_months)} · {animal.breed ?? 'Unknown breed'}
                     </p>

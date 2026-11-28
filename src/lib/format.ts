@@ -45,3 +45,15 @@ export function formatDateTime(iso: string): string {
 
     return Number.isNaN(date.getTime()) ? 'Date unknown' : dateTimeFormatter.format(date);
 }
+
+const monthFormatter = new Intl.DateTimeFormat('en-GB', { month: 'long' });
+
+export function formatDateParts(iso: string): { day: string; month: string } | null {
+    const date = new Date(iso);
+
+    if (Number.isNaN(date.getTime())) {
+        return null;
+    }
+
+    return { day: String(date.getDate()), month: monthFormatter.format(date) };
+}

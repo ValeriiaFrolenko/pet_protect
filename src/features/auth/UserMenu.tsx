@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
-import { signInWithGoogle, signOut } from './authRepository';
+import { signOut } from './authRepository';
+import { SignInButton } from './SignInButton';
 import { useAuth } from './useAuth';
 
 export function UserMenu() {
     const { user, isLoading } = useAuth();
-    const signIn = useMutation({ mutationFn: signInWithGoogle });
     const signOutMutation = useMutation({ mutationFn: signOut });
 
     if (isLoading) {
@@ -14,15 +14,7 @@ export function UserMenu() {
     if (!user) {
         return (
             <div className="user-menu">
-                <button
-                    type="button"
-                    className="button"
-                    onClick={() => signIn.mutate()}
-                    disabled={signIn.isPending}
-                >
-                    Sign in with Google
-                </button>
-                {signIn.isError && <p className="user-menu__error">{signIn.error.message}</p>}
+                <SignInButton />
             </div>
         );
     }
@@ -45,14 +37,16 @@ export function UserMenu() {
             <span className="user-menu__name">{name}</span>
             <button
                 type="button"
-                className="button"
+                className="button button--quiet"
                 onClick={() => signOutMutation.mutate()}
                 disabled={signOutMutation.isPending}
             >
-                Sign out
+                {signOutMutation.isPending ? 'Signing out...' : 'Sign out'}
             </button>
             {signOutMutation.isError && (
-                <p className="user-menu__error">{signOutMutation.error.message}</p>
+                <p className="user-menu__error" role="alert">
+                    Could not sign out. Please try again.
+                </p>
             )}
         </div>
     );

@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import type { AnimalListItem } from '../../types/animal';
-import { buildCatalogPage, PAGE_SIZE, type CatalogParams } from './catalogQuery';
+import {
+    buildCatalogPage,
+    hasActiveFilters,
+    PAGE_SIZE,
+    type CatalogParams,
+} from './catalogQuery';
 
 function makeAnimal(overrides: Partial<AnimalListItem> = {}): AnimalListItem {
     return {
@@ -154,5 +159,17 @@ describe('buildCatalogPage pagination', () => {
 
         expect(buildCatalogPage(animals, makeParams({ page: 99 })).page).toBe(3);
         expect(buildCatalogPage(animals, makeParams({ page: 0 })).page).toBe(1);
+    });
+});
+
+describe('hasActiveFilters', () => {
+    it('ignores sorting, page and a blank search', () => {
+        expect(hasActiveFilters(makeParams({ sort: 'name', page: 3, search: '   ' }))).toBe(false);
+    });
+
+    it('detects search, species and status filters', () => {
+        expect(hasActiveFilters(makeParams({ search: 'rex' }))).toBe(true);
+        expect(hasActiveFilters(makeParams({ species: 'cat' }))).toBe(true);
+        expect(hasActiveFilters(makeParams({ status: 'adopted' }))).toBe(true);
     });
 });

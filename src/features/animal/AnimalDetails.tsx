@@ -1,6 +1,7 @@
 import { ErrorState } from '../../components/ErrorState';
 import { LoadingState } from '../../components/LoadingState';
 import { useAnimal } from '../../hooks/useAnimals';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { formatAge, formatStatus } from '../../lib/format';
 import { NotFoundPage } from '../../pages/NotFoundPage';
 import { ShareButtons } from '../share/ShareButtons';
@@ -9,7 +10,9 @@ import { AnimalActions } from './AnimalActions';
 export function AnimalDetails({ id }: { id: number }) {
     const { data: animal, isPending, isError, error, refetch } = useAnimal(id);
 
-    if (isError) {
+    useDocumentTitle(animal?.name);
+
+    if (isError && !animal) {
         if (error.kind === 'not_found') {
             return <NotFoundPage />;
         }

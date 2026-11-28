@@ -1,4 +1,7 @@
 import { createRoot } from 'react-dom/client'
+import '@fontsource-variable/inter';
+import '@fontsource/barlow-condensed/latin-700.css';
+import '@fontsource/barlow-condensed/latin-800.css';
 import './styles/index.scss';
 import App from './App.tsx'
 import {queryClient} from "./lib/queryClient.ts";

@@ -6,10 +6,6 @@
   gap: v.$space-sm;
   align-items: center;
   margin-top: v.$space-lg;
-
-  .button {
-    text-decoration: none;
-  }
 }
 
 .share__label,
@@ -19,4 +15,9 @@
 
 .share__status {
   font-size: 0.9rem;
+}
+
+// Quiet buttons still need a visible outline here, so they do not read as plain text.
+.share .button--quiet {
+  border-color: v.$color-border;
 }

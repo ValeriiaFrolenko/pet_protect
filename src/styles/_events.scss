@@ -2,42 +2,91 @@
 
 .events__list {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
   gap: v.$space-lg;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  > li {
+    display: flex;
+  }
+}
+
+.events__past {
+  margin-top: v.$space-xl;
+
+  .event-card__cover,
+  .event-card__poster {
+    filter: grayscale(1);
+  }
 }
 
 .event-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   overflow: hidden;
   background: v.$color-surface;
   border: 1px solid v.$color-border;
-  border-radius: 0.5rem;
-
-  @media (min-width: 48rem) {
-    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
-  }
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-card;
 }
 
 .event-card__cover {
   width: 100%;
-  height: 100%;
+  height: auto;
   aspect-ratio: 3 / 2;
   object-fit: cover;
 }
 
+.event-card__poster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: v.$space-sm;
+  padding: v.$space-md v.$space-lg;
+  font-family: v.$font-display;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  background: v.$color-pink;
+}
+
+.events__list > li:nth-child(3n + 2) .event-card__poster {
+  background: v.$color-lavender;
+}
+
+.events__list > li:nth-child(3n) .event-card__poster {
+  background: v.$color-sun;
+}
+
+.event-card__day {
+  font-size: 4.5rem;
+  color: v.$color-accent;
+}
+
+.event-card__month {
+  font-size: 1.75rem;
+}
+
 .event-card__body {
-  padding: v.$space-md;
+  padding: v.$space-md v.$space-lg;
+}
+
+.event-card__date {
+  margin: 0 0 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: v.$color-orange;
 }
 
 .event-card__title {
-  margin: 0 0 0.25rem;
-  font-size: 1.25rem;
+  margin-bottom: v.$space-sm;
+  font-size: 1.75rem;
 }
 
 .event-card__meta {
-  margin: 0 0 v.$space-sm;
+  margin: 0;
   color: v.$color-muted;
 }

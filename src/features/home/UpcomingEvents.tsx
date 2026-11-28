@@ -17,16 +17,16 @@ export function UpcomingEvents() {
     );
 
     return (
-        <section className="home-section">
+        <section>
             <div className="home-section__header">
                 <h2>Upcoming events</h2>
                 <Link to="/events">All events</Link>
             </div>
 
-            {isError ? (
-                <ErrorState message={error.message} onRetry={() => void refetch()} />
-            ) : isPending ? (
+            {isPending ? (
                 <LoadingState />
+            ) : isError && !data ? (
+                <ErrorState message={error.message} onRetry={() => void refetch()} />
             ) : upcoming.length === 0 ? (
                 <p className="state">No upcoming events yet.</p>
             ) : (

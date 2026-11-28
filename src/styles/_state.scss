@@ -10,5 +10,24 @@
 }
 
 .state--error {
-  color: #e5736b;
+  color: v.$color-danger;
+}
+
+.state--empty {
+  padding: v.$space-xl v.$space-md;
+  text-align: center;
+  border: 2px dashed v.$color-pink-strong;
+  border-radius: v.$radius-lg;
+}
+
+.not-found {
+  padding-block: v.$space-xl;
+  text-align: center;
+}
+
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: v.$space-sm;
 }

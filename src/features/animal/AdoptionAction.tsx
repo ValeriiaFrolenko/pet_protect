@@ -32,11 +32,7 @@ export function AdoptionAction({ animal }: { animal: Animal }) {
     }
 
     if (animal.status !== 'available') {
-        return (
-            <button type="button" className="button" disabled>
-                Not available for adoption
-            </button>
-        );
+        return <span className="action__note">Not available for adoption</span>;
     }
 
     return <AdoptionRequestForm animal={animal} />;

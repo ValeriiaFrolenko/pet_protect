@@ -12,13 +12,14 @@ interface SideNavItemProps {
 
 export function SideNavItem({ item, depth, pathname, search }: SideNavItemProps) {
     const groupId = useId();
-    // Until the user toggles the group by hand, it is open if it contains the current page.
+    // Until the user toggles a group by hand, the top level is open, and so is any group
+    // that contains the current page.
     const [manualOpen, setManualOpen] = useState<boolean | undefined>(undefined);
 
     const children = item.children ?? [];
     const hasChildren = children.length > 0;
     const isActive = isNavItemActive(item.to, pathname, search);
-    const isOpen = manualOpen ?? containsActiveItem(item, pathname, search);
+    const isOpen = manualOpen ?? (depth === 0 || containsActiveItem(item, pathname, search));
 
     return (
         <li>

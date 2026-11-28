@@ -1,13 +1,35 @@
-$color-bg: #14161c;
-$color-surface: #1c1f27;
-$color-text: #e8eaf0;
-$color-muted: #9aa0ad;
-$color-border: #2f3441;
-$color-accent: #f0a04b;
+$color-bg: #fff8f4;
+$color-surface: #ffffff;
+$color-text: #2b2930;
+$color-muted: #625d6b;
+$color-border: #eadde4;
+// Dark enough for 4.5:1 text contrast on white and on the page background.
+$color-accent: #3343a8;
+$color-accent-hover: #28358a;
+$color-pink: #fbdcea;
+$color-pink-strong: #f29bc5;
+$color-lavender: #cfd2f7;
+$color-orange: #b8431d;
+$color-sun: #ffd666;
+$color-success: #1d7048;
+$color-danger: #b3261e;
+
+$font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
 
 $space-sm: 0.5rem;
 $space-md: 1rem;
 $space-lg: 1.5rem;
+$space-xl: 3rem;
+
+$radius-sm: 0.5rem;
+$radius-lg: 1.25rem;
+$radius-pill: 999px;
+$shadow-card: 0 0.25rem 1.25rem rgb(51 33 66 / 9%);
+$shadow-raised: 0 0.75rem 2rem rgb(51 33 66 / 18%);
+
+// Minimum size of a touch target.
+$tap-size: 2.75rem;
 
 $content-max-width: 72rem;
 $breakpoint-desktop: 64rem;

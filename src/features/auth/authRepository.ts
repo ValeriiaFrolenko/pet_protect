@@ -4,7 +4,8 @@ import { AppError } from '../../lib/errors';
 export async function signInWithGoogle(): Promise<void> {
     const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: window.location.origin },
+        // Return to the page where the user started, not to the home page.
+        options: { redirectTo: `${window.location.origin}${window.location.pathname}` },
     });
 
     if (error) {

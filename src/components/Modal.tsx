@@ -19,6 +19,8 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
 
         if (open && !dialog.open) {
             dialog.showModal();
+            // React's autoFocus runs on mount, while the dialog is still closed.
+            dialog.querySelector<HTMLElement>('[data-autofocus]')?.focus();
         } else if (!open && dialog.open) {
             dialog.close();
         }
@@ -42,7 +44,7 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
                 <h2 id={titleId} className="modal__title">
                     {title}
                 </h2>
-                <button type="button" className="button" aria-label="Close" onClick={onClose}>
+                <button type="button" className="button button--quiet button--icon" aria-label="Close" onClick={onClose}>
                     ×
                 </button>
             </div>
