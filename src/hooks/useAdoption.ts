@@ -26,7 +26,13 @@ export function useMyAdoptionRequests() {
 
     return useQuery<AdoptionRequest[], AppError>({
         queryKey: adoptionKeys.mine(user?.id),
-        queryFn: fetchMyAdoptionRequests,
+        queryFn: () => {
+            if (!user) {
+                throw new Error('Not authenticated');
+            }
+
+            return fetchMyAdoptionRequests(user.id);
+        },
         enabled: Boolean(user),
     });
 }
@@ -36,7 +42,13 @@ export function useMyAdoptionRequestsWithAnimal() {
 
     return useQuery<AdoptionRequestWithAnimal[], AppError>({
         queryKey: adoptionKeys.mineWithAnimal(user?.id),
-        queryFn: fetchMyAdoptionRequestsWithAnimal,
+        queryFn: () => {
+            if (!user) {
+                throw new Error('Not authenticated');
+            }
+
+            return fetchMyAdoptionRequestsWithAnimal(user.id);
+        },
         enabled: Boolean(user),
     });
 }

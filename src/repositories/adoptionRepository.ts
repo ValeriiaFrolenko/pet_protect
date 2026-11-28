@@ -9,10 +9,11 @@ import type {
 const COLUMNS = 'id, animal_id, user_id, message, status, created_at';
 const COLUMNS_WITH_ANIMAL = `${COLUMNS}, animal:animals(name, photo_url)`;
 
-export async function fetchMyAdoptionRequests(): Promise<AdoptionRequest[]> {
+export async function fetchMyAdoptionRequests(userId: string): Promise<AdoptionRequest[]> {
     const { data, error } = await supabase
         .from('adoption_requests')
         .select(COLUMNS)
+        .eq('user_id', userId)
         .order('created_at', { ascending: false });
 
     if (error) {
@@ -22,10 +23,13 @@ export async function fetchMyAdoptionRequests(): Promise<AdoptionRequest[]> {
     return data as AdoptionRequest[];
 }
 
-export async function fetchMyAdoptionRequestsWithAnimal(): Promise<AdoptionRequestWithAnimal[]> {
+export async function fetchMyAdoptionRequestsWithAnimal(
+    userId: string,
+): Promise<AdoptionRequestWithAnimal[]> {
     const { data, error } = await supabase
         .from('adoption_requests')
         .select(COLUMNS_WITH_ANIMAL)
+        .eq('user_id', userId)
         .order('created_at', { ascending: false });
 
     if (error) {
