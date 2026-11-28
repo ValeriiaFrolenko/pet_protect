@@ -7,17 +7,17 @@ export interface HeroSlide {
 export const HERO_SLIDES: readonly HeroSlide[] = [
     {
         id: 'adopt',
-        src: 'https://placehold.co/1600x400/2f3441/f0a04b?text=Adopt+a+friend',
+        src: '/hero/adopt.svg',
         alt: 'Adopt a friend from the shelter',
     },
     {
         id: 'events',
-        src: 'https://placehold.co/1600x400/1c1f27/f0a04b?text=Shelter+events',
+        src: '/hero/events.svg',
         alt: 'Upcoming shelter events',
     },
     {
         id: 'sponsor',
-        src: 'https://placehold.co/1600x400/2f3441/e8eaf0?text=Sponsor+an+animal',
+        src: '/hero/sponsor.svg',
         alt: 'Sponsor an animal every month',
     },
 ];

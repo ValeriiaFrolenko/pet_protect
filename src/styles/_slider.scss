@@ -1,14 +1,15 @@
 @use 'variables' as v;
 
+// The header stays fixed, so its height is taken away from the content all the time.
+// Keep the slider low and put its controls over the picture instead of under it.
 .slider {
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  height: clamp(9rem, 22vh, 15rem);
+  position: relative;
+  height: clamp(5rem, 14vh, 9rem);
   background: v.$color-bg;
 }
 
 .slider__viewport {
-  min-height: 0;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -37,13 +38,16 @@
 }
 
 .slider__bar {
-  position: relative;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 2rem;
+  min-height: 1.75rem;
   padding-inline: v.$space-sm;
-  background: v.$color-surface;
+  background: rgb(20 22 28 / 70%);
 }
 
 .slider__control {

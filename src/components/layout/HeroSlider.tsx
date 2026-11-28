@@ -66,7 +66,7 @@ export function HeroSlider() {
                                 src={slide.src}
                                 alt={slide.alt}
                                 width={1600}
-                                height={400}
+                                height={200}
                                 loading={slideIndex === 0 ? 'eager' : 'lazy'}
                             />
                         </li>
