@@ -1,0 +1,96 @@
+@use 'variables' as v;
+
+.admin__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-sm;
+  margin-block: v.$space-md;
+}
+
+.admin__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-md;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-block: v.$space-md;
+}
+
+// The table scrolls inside its own block, so the page never gets a horizontal scrollbar.
+.admin__table-wrap {
+  overflow-x: auto;
+  background: v.$color-surface;
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius-sm;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid v.$color-border;
+  }
+
+  th {
+    font-size: 0.8rem;
+    color: v.$color-muted;
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+.admin-table__thumb {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: v.$radius-sm;
+}
+
+.admin-table__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-sm;
+}
+
+.admin-table__message {
+  min-width: 12rem;
+  max-width: 24rem;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.admin-form {
+  display: grid;
+  gap: v.$space-md;
+}
+
+.admin-form__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: v.$space-md;
+}
+
+.admin-form__preview {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  border-radius: v.$radius-sm;
+}
+
+.field__hint {
+  font-size: 0.8rem;
+  color: v.$color-muted;
+}
+
+.field__error {
+  font-size: 0.85rem;
+  color: v.$color-danger;
+}

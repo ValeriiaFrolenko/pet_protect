@@ -1,6 +1,7 @@
 import { useId, useState, type FocusEvent, type KeyboardEvent, type MouseEvent } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { MAIN_NAV, type NavItem } from '../../app/navigation';
+import { ADMIN_MENU_ITEM, MAIN_NAV, type NavItem } from '../../app/navigation';
+import { useIsAdmin } from '../../hooks/useIsAdmin';
 import { isNavItemActive } from '../../lib/navigation';
 
 function NavEntry({ item }: { item: NavItem }) {
@@ -88,6 +89,8 @@ function SubMenu({ id, items, onSelect }: SubMenuProps) {
 export function MainNav() {
     const listId = useId();
     const [isOpen, setIsOpen] = useState(false);
+    const { isAdmin } = useIsAdmin();
+    const items = isAdmin ? [...MAIN_NAV, ADMIN_MENU_ITEM] : MAIN_NAV;
 
     const handleListClick = (event: MouseEvent<HTMLUListElement>) => {
         if (event.target instanceof Element && event.target.closest('a')) {
@@ -117,7 +120,7 @@ export function MainNav() {
                 className={isOpen ? 'main-nav main-nav--open' : 'main-nav'}
                 onClick={handleListClick}
             >
-                {MAIN_NAV.map((item) => (
+                {items.map((item) => (
                     <NavEntry key={item.to} item={item} />
                 ))}
             </ul>

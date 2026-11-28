@@ -20,3 +20,15 @@ export const MAIN_NAV: NavItem[] = [
     { label: 'Gallery', to: '/gallery' },
     { label: 'Contacts', to: '/contacts' },
 ];
+
+export const ADMIN_NAV: NavItem[] = [
+    { label: 'Animals', to: '/admin/animals' },
+    { label: 'Events', to: '/admin/events' },
+    { label: 'Requests', to: '/admin/requests' },
+];
+
+export const ADMIN_MENU_ITEM: NavItem = {
+    label: 'Admin',
+    to: '/admin',
+    children: ADMIN_NAV,
+};
