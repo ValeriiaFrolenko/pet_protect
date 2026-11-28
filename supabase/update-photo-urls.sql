@@ -1,0 +1,12 @@
+update public.animals set photo_url = '/img/animals/rex.jpg' where name = 'Rex';
+update public.animals set photo_url = '/img/animals/bella.jpg' where name = 'Bella';
+update public.animals set photo_url = '/img/animals/max.jpg' where name = 'Max';
+update public.animals set photo_url = '/img/animals/luna.jpg' where name = 'Luna';
+update public.animals set photo_url = '/img/animals/tom.jpg' where name = 'Tom';
+update public.animals set photo_url = '/img/animals/milo.jpg' where name = 'Milo';
+update public.animals set photo_url = '/img/animals/daisy.jpg' where name = 'Daisy';
+update public.animals set photo_url = '/img/animals/charlie.jpg' where name = 'Charlie';
+update public.animals set photo_url = '/img/animals/nala.jpg' where name = 'Nala';
+update public.animals set photo_url = '/img/animals/coco.jpg' where name = 'Coco';
+update public.animals set photo_url = '/img/animals/buddy.jpg' where name = 'Buddy';
+update public.animals set photo_url = '/img/animals/shadow.jpg' where name = 'Shadow';
