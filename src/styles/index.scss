@@ -6,6 +6,7 @@
 @use 'catalog';
 @use 'pagination';
 @use 'user-menu';
+@use 'notifications';
 @use 'animal-details';
 @use 'animal-actions';
 @use 'modal';
@@ -19,3 +20,4 @@
 @use 'side-nav';
 @use 'footer';
 @use 'admin';
+@use 'my-requests';

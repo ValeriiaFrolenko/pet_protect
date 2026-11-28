@@ -6,10 +6,10 @@ import { LoadingState } from '../../components/LoadingState';
 import { Pagination } from '../../components/Pagination';
 import { SelectField } from '../../components/SelectField';
 import { filterRequests, type RequestFilter } from '../../features/admin/adminFilters';
-import { REQUEST_FILTER_OPTIONS, REQUEST_STATUS_LABELS } from '../../features/admin/adminOptions';
+import { REQUEST_FILTER_OPTIONS } from '../../features/admin/adminOptions';
 import { describeDecisionError } from '../../features/admin/errorMessages';
 import { useAdminRequests, useDecideRequest } from '../../hooks/useAdminRequests';
-import { formatDateTime } from '../../lib/format';
+import { formatAdoptionStatus, formatDateTime } from '../../lib/format';
 import { paginate } from '../../lib/paginate';
 
 export function AdminRequestsPage() {
@@ -82,7 +82,7 @@ export function AdminRequestsPage() {
                                     </td>
                                     <td>{request.requester_email || 'Unknown'}</td>
                                     <td className="admin-table__message">{request.message}</td>
-                                    <td>{REQUEST_STATUS_LABELS[request.status]}</td>
+                                    <td>{formatAdoptionStatus(request.status)}</td>
                                     <td>
                                         {request.status === 'pending' && (
                                             <div className="admin-table__actions">

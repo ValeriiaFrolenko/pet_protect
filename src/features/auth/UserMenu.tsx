@@ -1,4 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
+import { NotificationBell } from '../notifications/NotificationBell';
 import { signOut } from './authRepository';
 import { SignInButton } from './SignInButton';
 import { useAuth } from './useAuth';
@@ -24,6 +26,7 @@ export function UserMenu() {
 
     return (
         <div className="user-menu">
+            <NotificationBell />
             {avatarUrl && (
                 <img
                     className="user-menu__avatar"
@@ -35,6 +38,9 @@ export function UserMenu() {
                 />
             )}
             <span className="user-menu__name">{name}</span>
+            <Link to="/account/requests" className="button button--quiet">
+                My requests
+            </Link>
             <button
                 type="button"
                 className="button button--quiet"

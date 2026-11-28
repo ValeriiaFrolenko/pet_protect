@@ -1,8 +1,13 @@
 import { supabase } from '../lib/supabase';
 import { toAppError } from '../lib/errors';
-import type { AdoptionRequest, CreateAdoptionRequestInput } from '../types/adoption';
+import type {
+    AdoptionRequest,
+    AdoptionRequestWithAnimal,
+    CreateAdoptionRequestInput,
+} from '../types/adoption';
 
 const COLUMNS = 'id, animal_id, user_id, message, status, created_at';
+const COLUMNS_WITH_ANIMAL = `${COLUMNS}, animal:animals(name, photo_url)`;
 
 export async function fetchMyAdoptionRequests(): Promise<AdoptionRequest[]> {
     const { data, error } = await supabase
@@ -15,6 +20,19 @@ export async function fetchMyAdoptionRequests(): Promise<AdoptionRequest[]> {
     }
 
     return data as AdoptionRequest[];
+}
+
+export async function fetchMyAdoptionRequestsWithAnimal(): Promise<AdoptionRequestWithAnimal[]> {
+    const { data, error } = await supabase
+        .from('adoption_requests')
+        .select(COLUMNS_WITH_ANIMAL)
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        throw toAppError(error);
+    }
+
+    return data as unknown as AdoptionRequestWithAnimal[];
 }
 
 export async function createAdoptionRequest(

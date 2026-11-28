@@ -1,0 +1,108 @@
+@use 'variables' as v;
+
+.notification-bell {
+  position: relative;
+}
+
+.notification-bell__toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: v.$tap-size;
+  height: v.$tap-size;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: v.$radius-pill;
+
+  &:hover {
+    background: v.$color-pink;
+  }
+}
+
+.notification-bell__badge {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1.1rem;
+  color: #fff;
+  text-align: center;
+  background: v.$color-danger;
+  border-radius: v.$radius-pill;
+}
+
+.notification-bell__panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  width: 20rem;
+  max-width: 90vw;
+  margin-top: v.$space-sm;
+  overflow: hidden;
+  background: v.$color-surface;
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius-sm;
+  box-shadow: v.$shadow-raised;
+}
+
+.notification-bell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: v.$space-sm v.$space-md;
+  font-weight: 600;
+  border-bottom: 1px solid v.$color-border;
+}
+
+.notification-bell__mark-all {
+  font-size: 0.8rem;
+}
+
+.notification-bell__empty {
+  margin: 0;
+  padding: v.$space-md;
+  color: v.$color-muted;
+}
+
+.notification-bell__list {
+  max-height: 20rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.notification-bell__item {
+  border-bottom: 1px solid v.$color-border;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  a {
+    display: block;
+    padding: v.$space-sm v.$space-md;
+    text-decoration: none;
+  }
+}
+
+.notification-bell__item--unread {
+  background: v.$color-pink;
+}
+
+.notification-bell__time {
+  display: block;
+  padding: 0 v.$space-md v.$space-sm;
+  font-size: 0.75rem;
+  color: v.$color-muted;
+}

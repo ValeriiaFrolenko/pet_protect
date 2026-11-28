@@ -1,5 +1,4 @@
 import type { SelectOption } from '../../components/SelectField';
-import type { AdoptionRequestStatus } from '../../types/adoption';
 import type { AnimalStatus, Sex, Species } from '../../types/animal';
 import type { RequestFilter } from './adminFilters';
 
@@ -28,10 +27,3 @@ export const REQUEST_FILTER_OPTIONS: readonly SelectOption<RequestFilter>[] = [
     { value: 'cancelled', label: 'Cancelled' },
     { value: 'all', label: 'All' },
 ];
-
-export const REQUEST_STATUS_LABELS: Readonly<Record<AdoptionRequestStatus, string>> = {
-    pending: 'Pending',
-    approved: 'Approved',
-    rejected: 'Rejected',
-    cancelled: 'Cancelled',
-};

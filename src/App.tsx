@@ -2,9 +2,11 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { AdminLayout } from './features/admin/AdminLayout';
 import { AdminRoute } from './features/admin/AdminRoute';
+import { RequireAuth } from './features/account/RequireAuth';
 import { AdminAnimalsPage } from './pages/admin/AdminAnimalsPage';
 import { AdminEventsPage } from './pages/admin/AdminEventsPage';
 import { AdminRequestsPage } from './pages/admin/AdminRequestsPage';
+import { MyRequestsPage } from './pages/account/MyRequestsPage';
 import { CatalogPage } from './pages/CatalogPage';
 import { ContactsPage } from './pages/ContactsPage';
 import { EventsPage } from './pages/EventsPage';
@@ -23,6 +25,9 @@ function App() {
                 <Route path="events" element={<EventsPage />} />
                 <Route path="gallery" element={<GalleryPage />} />
                 <Route path="contacts" element={<ContactsPage />} />
+                <Route path="account" element={<RequireAuth />}>
+                    <Route path="requests" element={<MyRequestsPage />} />
+                </Route>
                 <Route path="admin" element={<AdminRoute />}>
                     <Route element={<AdminLayout />}>
                         <Route index element={<Navigate to="animals" replace />} />

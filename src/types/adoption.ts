@@ -13,3 +13,7 @@ export interface CreateAdoptionRequestInput {
     animalId: number;
     message: string;
 }
+
+export interface AdoptionRequestWithAnimal extends AdoptionRequest {
+    animal: { name: string; photo_url: string } | null;
+}

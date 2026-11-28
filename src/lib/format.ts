@@ -1,4 +1,5 @@
 import type { AnimalStatus } from '../types/animal';
+import type { AdoptionRequestStatus } from '../types/adoption';
 
 export function formatAge(months: number | null): string {
     if (months === null) {
@@ -33,6 +34,17 @@ const STATUS_LABELS: Readonly<Record<AnimalStatus, string>> = {
 
 export function formatStatus(status: AnimalStatus): string {
     return STATUS_LABELS[status];
+}
+
+const ADOPTION_STATUS_LABELS: Readonly<Record<AdoptionRequestStatus, string>> = {
+    pending: 'Pending',
+    approved: 'Approved',
+    rejected: 'Rejected',
+    cancelled: 'Cancelled',
+};
+
+export function formatAdoptionStatus(status: AdoptionRequestStatus): string {
+    return ADOPTION_STATUS_LABELS[status];
 }
 
 const dateTimeFormatter = new Intl.DateTimeFormat('en-GB', {
