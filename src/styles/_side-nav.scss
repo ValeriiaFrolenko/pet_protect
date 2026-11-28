@@ -74,7 +74,10 @@ $side-nav-indent: 16px;
 }
 
 .side-nav__toggle {
-  width: 2.5rem;
+  flex: 0 0 2.75rem;
+  min-height: 2.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
   color: inherit;
   cursor: pointer;
   background: none;

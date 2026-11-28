@@ -1,26 +1,32 @@
 import type { NavItem } from './navigation';
 
+// The side menu is a catalog navigator: it only holds filter combinations.
+// Site sections (Home, Events, Gallery, Contacts) live in the main menu.
+const SPECIES: readonly { label: string; value: string }[] = [
+    { label: 'Dogs', value: 'dog' },
+    { label: 'Cats', value: 'cat' },
+    { label: 'Other', value: 'other' },
+];
+
+function statusGroup(label: string, status: string): NavItem {
+    return {
+        label,
+        to: `/animals?status=${status}`,
+        children: SPECIES.map((species) => ({
+            label: species.label,
+            to: `/animals?status=${status}&species=${species.value}`,
+        })),
+    };
+}
+
 export const SIDE_NAV: readonly NavItem[] = [
     {
-        label: 'Animals',
+        label: 'Find a pet',
         to: '/animals',
         children: [
-            { label: 'All animals', to: '/animals' },
-            { label: 'Dogs', to: '/animals?species=dog' },
-            { label: 'Cats', to: '/animals?species=cat' },
-            { label: 'Other', to: '/animals?species=other' },
-            {
-                label: 'By status',
-                to: '/animals',
-                children: [
-                    { label: 'Available', to: '/animals?status=available' },
-                    { label: 'Reserved', to: '/animals?status=reserved' },
-                    { label: 'Adopted', to: '/animals?status=adopted' },
-                ],
-            },
+            statusGroup('Available', 'available'),
+            statusGroup('Reserved', 'reserved'),
+            statusGroup('Adopted', 'adopted'),
         ],
     },
-    { label: 'Events', to: '/events' },
-    { label: 'Gallery', to: '/gallery' },
-    { label: 'Contacts', to: '/contacts' },
 ];

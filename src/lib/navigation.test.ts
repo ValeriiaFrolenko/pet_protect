@@ -26,6 +26,16 @@ describe('isNavItemActive', () => {
             isNavItemActive('/animals?species=dog', '/animals', '?species=dog&status=adopted'),
         ).toBe(false);
     });
+
+    it('compares combined filters regardless of the order of params', () => {
+        expect(
+            isNavItemActive(
+                '/animals?status=available&species=dog',
+                '/animals',
+                '?species=dog&status=available',
+            ),
+        ).toBe(true);
+    });
 });
 
 describe('containsActiveItem', () => {
